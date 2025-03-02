@@ -1,22 +1,50 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import { auth } from './../../firebase.init';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-export const AuthContext = createContext()
-const AuthProvider = ({children}) => {
-const [user,setUser]=useState()
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from 'firebase/auth';
 
+export const AuthContext = createContext();
 
-const createUser=( email, password)=>{
-    return createUserWithEmailAndPassword(auth, email, password)
-}
-   
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-const authInfo={user,setUser ,createUser}
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        // Ensure updated user data is set, including photoURL
+        setUser({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          displayName: currentUser.displayName,
+          photoURL: currentUser.photoURL, // ✅ Ensure photoURL is included
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup subscription
+  }, []);
+
+  const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
+  const signInUser = (email, password) => signInWithEmailAndPassword(auth, email, password);
+  const logOut = () => signOut(auth);
+  const updateProfileData=(updatedDate)=>{
+    return updateProfile(auth.currentUser,updatedDate)
+  }
+  const authInfo = {
+    user,
+    signInUser,
+    logOut,
+    setUser,
+    createUser,
+    updateProfileData,
+  };
+
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
