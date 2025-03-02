@@ -38,7 +38,7 @@ const Header = () => {
   {/* profile pic */}
   <div><CgProfile /></div>
   <div className="navbar-end">
-<NavLink className='text-md font-bold' to='/register'>Register</NavLink>
+<NavLink className='text-md font-bold ' to='/register'>Register</NavLink>
   </div>
 </div>
         </div>
