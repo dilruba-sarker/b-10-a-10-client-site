@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TableAllCampaign = ({singleData,idx}) => {
     console.log(singleData);
@@ -12,7 +13,9 @@ const TableAllCampaign = ({singleData,idx}) => {
         <td className="px-4 py-2">{title}</td>
         <td className="px-4 py-2">{deadline}</td>
         <td className="px-4 py-2">{amount}</td>
-        <td className="px-4 py-2 text-blue-500 cursor-pointer">See more</td>
+       
+        <td  >     <Link to={`/campaign/${_id}`}><button className="btn btn-primary">See more</button> </Link></td>
+      
     </tr>
     );
 };

@@ -1,21 +1,11 @@
-// import React from 'react';
-
-// const AddCampaign = () => {
-//     return (
-//         <div>
-            
-//         </div>
-//     );
-// };
-
-// export default AddCampaign;
 
 
-
+import { useContext } from "react";
+import { AuthContext } from "./AuthProvider/AuthProvider";
 
 
 const AddCampaign = () => {
-
+const {user}=useContext(AuthContext)
 
     const handleSubmit=e=>{
         e.preventDefault()
@@ -29,7 +19,8 @@ const AddCampaign = () => {
         const photo=form.photo.value;
         const deadline=form.deadline.value
         const newCampaign={name,email,title,description,amount,type,photo
-          , deadline
+          , deadline,  userName: user?.displayName || "Anonymous",
+          userEmail: user?.email || "No Email",
         }
         console.log('data of newCampaign',newCampaign)
         // send data to serve
@@ -119,8 +110,8 @@ const AddCampaign = () => {
        <div className="w-full flex flex-col mb-2">
 
           <label className="label">
-        const deadline=form.photo.value
-        const deadline=form.photo.value
+      
+       
         <span className="label-text">Dead Line: </span>
           </label>
           <input type="date" name="deadline" placeholder="deadline" className="input input-bordered w-full" required />
