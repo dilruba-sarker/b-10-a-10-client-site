@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
         loader: async () => {
-          const response = await fetch('http://localhost:3000/campaigns');
+          const response = await fetch('http://localhost:3000/campaignslimit');
           if (!response.ok) {
             throw new Error('Failed to fetch campaigns');
           }
@@ -46,6 +46,8 @@ const router = createBrowserRouter([
       {
         path: "/campaigns",
         element: <AllCampaign />,
+        loader:()=>fetch("http://localhost:3000/campaigns")
+       
       },
       {
         path: "/addCampaign",

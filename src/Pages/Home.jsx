@@ -62,7 +62,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch campaigns from backend
-    fetch("http://localhost:3000/campaigns")
+    fetch("http://localhost:3000/campaignslimit")
       .then(res => res.json())
       .then(data => {
         console.log("Fetched campaigns:", data, "Length:", data.length);
