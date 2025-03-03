@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading,setLoading]=useState(true)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -17,6 +18,7 @@ const AuthProvider = ({ children }) => {
           displayName: currentUser.displayName,
           photoURL: currentUser.photoURL, // ✅ Ensure photoURL is included
         });
+        setLoading(false)
       } else {
         setUser(null);
       }
@@ -25,9 +27,18 @@ const AuthProvider = ({ children }) => {
     return () => unsubscribe(); // Cleanup subscription
   }, []);
 
-  const createUser = (email, password) => createUserWithEmailAndPassword(auth, email, password);
-  const signInUser = (email, password) => signInWithEmailAndPassword(auth, email, password);
-  const logOut = () => signOut(auth);
+  const createUser = (email, password) => {
+    setLoading(true)
+    return createUserWithEmailAndPassword(auth, email, password)
+  };
+  const signInUser = (email, password) => {
+    setLoading(true)
+    return signInWithEmailAndPassword(auth, email, password);
+  }
+  const logOut = () => {
+    setLoading(true)
+    return signOut(auth)
+  };
   const updateProfileData=(updatedDate)=>{
     return updateProfile(auth.currentUser,updatedDate)
   }
