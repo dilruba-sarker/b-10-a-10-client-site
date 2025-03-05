@@ -8,7 +8,7 @@
 //    const [myData, setMyData] = useState([]);
 //    useEffect(() => {
 //        if (user?.email) {
-//          fetch(`http://localhost:3000/myDonations?}`)
+//          fetch(`https://b-10-a-10-server.vercel.app/myDonations?}`)
 //            .then((res) => res.json())
 //            .then((data) => {
 //              console.log("Data from backend:", data);
@@ -42,7 +42,7 @@ const MyDonations = () => {
 
     useEffect(() => {
         if (user?.email) {
-            fetch(`http://localhost:3000/donate?email=${user.email}`)
+            fetch(`https://b-10-a-10-server.vercel.app/donate?email=${user.email}`)
                 .then((res) => res.json())
                 .then((data) => {
                     console.log("Fetched Donations:", data);

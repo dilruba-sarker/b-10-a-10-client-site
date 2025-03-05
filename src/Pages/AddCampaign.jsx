@@ -25,7 +25,7 @@ const {user}=useContext(AuthContext)
         }
         console.log('data of newCampaign',newCampaign)
         // send data to serve
-        fetch('http://localhost:3000/addCampaign',{
+        fetch('https://b-10-a-10-server.vercel.app/addCampaign',{
           method: "POST",
           headers: {
             "Content-Type": "application/json",

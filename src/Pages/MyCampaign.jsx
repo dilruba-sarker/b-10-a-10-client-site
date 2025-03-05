@@ -12,7 +12,7 @@ const MyCampaign = () => {
   // Fetch campaigns for the logged-in user
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/myCampaign?email=${user.email}`)
+      fetch(`https://b-10-a-10-server.vercel.app/myCampaign?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           console.log("Data from backend:", data);
@@ -37,7 +37,7 @@ const MyCampaign = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         // Send DELETE request to the backend
-        fetch(`http://localhost:3000/myCampaign/${id}`, {
+        fetch(`https://b-10-a-10-server.vercel.app/myCampaign/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

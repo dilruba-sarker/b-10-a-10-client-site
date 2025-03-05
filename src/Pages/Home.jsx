@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     // Fetch campaigns from backend
-    fetch("http://localhost:3000/campaignslimit")
+    fetch("https://b-10-a-10-server.vercel.app/campaignslimit")
       .then(res => res.json())
       .then(data => {
      

@@ -32,7 +32,7 @@ const Update = () => {
     console.log("Updated campaign data:", updatedCampaign);
 
     // Send data to the server
-    fetch(`http://localhost:3000/updateCampaign/${id}`, {
+    fetch(`https://b-10-a-10-server.vercel.app/updateCampaign/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

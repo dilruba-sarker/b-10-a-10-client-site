@@ -136,7 +136,7 @@ const AuthProvider = ({ children }) => {
   // Context value
   const authInfo = {
     googleSignIn,
-    user,
+    user,setUser,
     loading,
     createUser,
     signInUser,

@@ -33,7 +33,7 @@
 //       alert("over")
 //       return
 //     }
-//     fetch("http://localhost:3000/donate", {
+//     fetch("https://b-10-a-10-server.vercel.app/donate", {
 //       method: "POST",
 //       headers: { "Content-Type": "application/json" },
 //       body: JSON.stringify(donateNew),
@@ -128,7 +128,7 @@ const isExpired = campaignDeadline < currentDate; // Compare only dates
       });
       return;
     }
-    fetch("http://localhost:3000/donate", {
+    fetch("https://b-10-a-10-server.vercel.app/donate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(donateNew),
