@@ -1,61 +1,13 @@
-// import React from 'react';
-// import ImageSlider from './ImageSlider';
-// import { useLoaderData } from 'react-router-dom';
-
-// const Home = () => {
-//   const campaignsData = useLoaderData(); // Access the fetched data
-//   console.log("Fetched campaigns data:", campaignsData);
-
-//   // Filter campaigns with a future deadline
-//   const currentDate = new Date(); // Get the current date
-//   const activeCampaigns = campaignsData.filter((campaign) => {
-//     const campaignDeadline = new Date(campaign.deadline); // Convert deadline to Date object
-//     return campaignDeadline > currentDate; // Keep campaigns with a future deadline
-//   });
-
-//   return (
-//     <div className="p-8">
-//       <h1 className="text-2xl font-bold">Together, We Can Make a Peaceful World</h1>
-//       <p className="text-lg mt-4">
-//         Madagascar Association is a non-profit organization that works tirelessly to improve the living conditions of the most vulnerable communities in Madagascar. We believe that every small gesture counts and that your generosity can make a big difference in the lives of the people we help.
-//       </p>
-//       <p className="text-lg">
-//         We are grateful that you have chosen to donate to our association and we sincerely thank you for your support. With your contribution, we will be able to continue supporting the associations present in Madagascar and providing concrete assistance to local communities. Your donation will help fund projects in the areas of health, education, water and sanitation, and environmental protection.
-//       </p>
-//       <ImageSlider></ImageSlider>
-
-//       <div className="mt-8">
-//         <h1 className="text-2xl font-extrabold text-blue-600">Running Campaign</h1>
-//         <p className="w-3xl bg-amber-100 mx-auto mt-4 p-4 text-bold">
-//           In our Running Campaigns section, you can explore all the active and ongoing campaigns. These campaigns focus on various social, educational, health, and developmental projects, all aiming to bring positive change. By donating, you can contribute to these causes and be a part of making a difference. Our goal is to work together for the betterment of society, and with your support, we can achieve this vision. Join us in creating a lasting impact through your generous contributions.
-//         </p>
-//       </div>
-
-//       {/* Display active campaigns data */}
-//       <div className="mt-8">
-//         <h2 className="text-xl font-bold">Active Campaigns:</h2>
-//         <ul className="mt-4">
-//           {activeCampaigns.map((campaign) => (
-//             <li key={campaign.name} className="mt-4 p-4 bg-gray-100 rounded-lg">
-//               <h3 className="text-lg font-semibold">{campaign.title}</h3>
-//               <h3 className="text-lg font-semibold">{campaign.email}</h3>
-//               <p className="text-sm">{campaign.description}</p>
-//               <p className="text-sm">Minimum Donation: ${campaign.amount}</p>
-//               <p className="text-sm">Deadline: {new Date(campaign.deadline).toLocaleDateString()}</p>
-//               <p><img src={campaign.photo} alt={campaign.title} className="w-32 h-32 object-cover" /></p>
-//             </li>
-//           ))}
-//         </ul>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Home;
 
 import React, { useEffect, useState } from 'react';
-import ImageSlider from './ImageSlider';
+
 import { Link } from 'react-router-dom';
+import 'react-tooltip/dist/react-tooltip.css'
+import { Tooltip } from 'react-tooltip';
+import Slider from '../Components/slider/Slider';
+import About from '../Components/About';
+import Impact from '../Components/Impact';
+
 
 const Home = () => {
   const [campaigns, setCampaigns] = useState([]); // State for campaigns data
@@ -65,7 +17,7 @@ const Home = () => {
     fetch("http://localhost:3000/campaignslimit")
       .then(res => res.json())
       .then(data => {
-        console.log("Fetched campaigns:", data, "Length:", data.length);
+     
         setCampaigns(data); // Store fetched campaigns in state
       })
       .catch(error => console.error("Error fetching campaigns:", error));
@@ -78,22 +30,27 @@ const Home = () => {
     return campaignDeadline > currentDate;
   });
 
-  console.log("Active campaigns after filtering:", activeCampaigns.length);
+
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold">Together, We Can Make a Peaceful World</h1>
+     
+      <a data-tooltip-id="my-tooltip" data-tooltip-content="Together, We Can Make a Peaceful World!">
+  ◕‿‿◕
+</a>
+<Tooltip id="my-tooltip" />
+      {/* <Loiter></Loiter> */}
       <p className="text-lg mt-4">
         Madagascar Association is a non-profit organization that works tirelessly to improve the living conditions of the most vulnerable communities in Madagascar. We believe that every small gesture counts and that your generosity can make a big difference in the lives of the people we help.
       </p>
       <p className="text-lg">
         We are grateful that you have chosen to donate to our association and we sincerely thank you for your support. With your contribution, we will be able to continue supporting the associations present in Madagascar and providing concrete assistance to local communities. Your donation will help fund projects in the areas of health, education, water and sanitation, and environmental protection.
       </p>
-      <ImageSlider />
+      <Slider />
 
       <div className="mt-8">
         <h1 className="text-2xl font-extrabold text-blue-600">Running Campaign</h1>
-        <p className="w-3xl bg-amber-100 mx-auto mt-4 p-4 text-bold">
+        <p className="mx-w-xl lg:mx-w-4xl md:mx-w-2xl  bg-red-300 mx-auto mt-4 p-4 text-bold">
           In our Running Campaigns section, you can explore all the active and ongoing campaigns. These campaigns focus on various social, educational, health, and developmental projects, all aiming to bring positive change. By donating, you can contribute to these causes and be a part of making a difference. Our goal is to work together for the betterment of society, and with your support, we can achieve this vision. Join us in creating a lasting impact through your generous contributions.
         </p>
       </div>
@@ -101,17 +58,10 @@ const Home = () => {
       {/* Display active campaigns data */}
       <div className="mt-8 ">
         <h2 className="text-xl font-bold">Active Campaigns:</h2>
-        <ul className="mt-4 grid grid-cols-2 gap-4">
+        <ul className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
           {activeCampaigns.length > 0 ? (
             activeCampaigns.map((campaign) => (
-              // <li key={campaign._id} className="mt-4 p-4 bg-gray-100 rounded-lg">
-              //   <h3 className="text-lg font-semibold">{campaign.title}</h3>
-              //   <h3 className="text-lg font-semibold">{campaign.email}</h3>
-              //   <p className="text-sm">{campaign.description}</p>
-              //   <p className="text-sm">Minimum Donation: ${campaign.amount}</p>
-              //   <p className="text-sm">Deadline: {new Date(campaign.deadline).toLocaleDateString()}</p>
-              //   <img src={campaign.photo} alt={campaign.title} className="w-32 h-32 object-cover" />
-              // </li>
+             
 
               <div className="card bg-base-100 w-72 h-96 shadow-xl ">
   <figure>
@@ -127,7 +77,7 @@ const Home = () => {
     <p className="text-xl">Deadline: {new Date(campaign.deadline).toLocaleDateString()}</p>
     <div className="card-actions justify-end">
       
-      <Link to={`/campaign/${campaign._id}`}><button className="btn btn-primary">See more</button> </Link>
+      <Link to={`/campaign/${campaign._id}`}><button className="btn btn-primary text-black">See more</button> </Link>
     </div>
   </div>
 </div>
@@ -137,6 +87,10 @@ const Home = () => {
           )}
         </ul>
       </div>
+      <About></About>
+      <Impact></Impact>
+      
+     <Link to='/campaigns'><button  className="btn btn-warning mt-4">Donate</button></Link>
     </div>
   );
 };

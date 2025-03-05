@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const TableAllCampaign = ({singleData,idx}) => {
-    console.log(singleData);
+  
     const {_id,name,title,amount,deadline,photo}=singleData
    
 
     return (
+   <div></div>,
         <tr className="hover:bg-gray-100 border-b">
         <td className="px-4 py-2">{idx + 1}</td>
         <td className="px-4 py-2">{name}</td>

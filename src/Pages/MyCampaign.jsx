@@ -67,7 +67,7 @@ const MyCampaign = () => {
 
   return (
     <div>
-      <h1>All Campaigns: {myData.length}</h1>
+      <h1>My All Campaigns: {myData.length}</h1>
       <div className="overflow-x-auto">
         {myData.length === 0 ? (
           <p className="text-center text-gray-500">No Data Found</p>

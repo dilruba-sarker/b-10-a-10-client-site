@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { AuthContext } from "./AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const AddCampaign = () => {
@@ -33,9 +34,14 @@ const {user}=useContext(AuthContext)
         })
         .then(res=>res.json())
         .then(data=>{
-          console.log("res data from md",data)
+     
           if(data. insertedId){
-            alert("data added to md")
+           
+            Swal.fire({
+              title: "Good job!",
+              text: "Campaign added successfully!",
+              icon: "success"
+            });
           }
         })
     }

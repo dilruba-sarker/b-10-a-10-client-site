@@ -2,11 +2,12 @@ import React, { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from './AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import { FcGoogle } from 'react-icons/fc';
 
 const Login = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser,googleSignIn} = useContext(AuthContext);
   const navigate = useNavigate();  // To navigate after successful login
 
   const handleLogin = (e) => {
@@ -33,6 +34,16 @@ const Login = () => {
         setError(err.message);
       });
   };
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await googleSignIn();
+   
+      navigate(location?.state || "/");
+      alert("Google Sign-In Successful!");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <div>
@@ -58,6 +69,9 @@ const Login = () => {
                 <p className='text-lg text-green-500'>
                   Don't have an account? <Link to="/register">Register</Link>
                 </p>
+                <button onClick={handleGoogleSignIn} className="btn btn-ghost flex items-center gap-2">
+                <FcGoogle size={20} /> Sign in with Google
+              </button>
               </form>
             </div>
           </div>

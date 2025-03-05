@@ -32,11 +32,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from './AuthProvider/AuthProvider';
+import Loiter from './Loiter';
 
 
 const MyDonations = () => {
     const { user } = useContext(AuthContext);
-    const allDonations = useLoaderData();
+    // const allDonations = useLoaderData();
     const [myDonations, setMyDonations] = useState([]);
 
     useEffect(() => {
@@ -55,6 +56,7 @@ const MyDonations = () => {
 
     return (
         <div className="container mx-auto p-6">
+            <Loiter></Loiter>
             <h1 className="text-3xl font-bold text-center mb-6">My Donations ({myDonations.length})</h1>
             {myDonations.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,2 +1,20 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+/* src/App.css */
+/* src/components/DarkLight.css */
+/* Light Theme */
+.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.dark {
+  background-color: #121212;
+  color: #134cf7;
+}
+
+/* Optional: Ensure body matches the theme */
+html, body {
+  transition: background-color 0.3s, color 0.3s;
+}
